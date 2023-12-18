@@ -1,0 +1,91 @@
+<div class="container py-5 px-2">
+<div class="row">
+        <div class="col-sm-12 col-md-12">
+            
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    
+                    <div class="card-collapsible card">
+                        <div class="card-header">
+                          Crear Presupuesto <i class="fa fa-caret-down caret"></i>
+                        </div>
+                        <div class="card-body">
+                            <form #formPresupuesto="ngForm" (ngSubmit)="guardarPresupuesto(formPresupuesto)">
+          
+                            <div class="form-group mb-2">
+                                <label>Fecha Inicial</label>
+                                <input type="date" class="form-control" [(ngModel)]="formularioData.fechaInicial" [ngModelOptions]="{standalone: true}" required >
+                            </div>
+
+                            
+                            <div class="form-group mb-2">
+                                <label>Fecha Final</label>
+                                <input type="date" class="form-control" [(ngModel)]="formularioData.fechaFinal" [ngModelOptions]="{standalone: true}" required >
+                            </div>
+          
+                            <div class="form-group">
+                                <label>Presupuesto:</label>
+                                <input type="number" class="form-control" placeholder="Total" [(ngModel)]="formularioData.amount" [ngModelOptions]="{standalone: true}" required >
+                            </div>
+          
+                            <div class="form-group mt-2">
+                                <label>Nombre del Presupuesto</label>
+                                <input type="text" class="form-control" [(ngModel)]="formularioData.nombre" [ngModelOptions]="{standalone: true}" required >
+                            </div>
+          
+                            <div class="form-group mt-2">
+                                <button type="submit" class="btn btn-primary">
+                                  <i class="fa fa-send"></i>
+                                  Agregar Presupuesto
+                                </button>
+                            </div>
+                            <div class="alert alert-danger mt-4" *ngIf="errorGuardar"  role="alert">
+                                Todos los campos son requeridos!
+                              </div>
+          
+                          </form>
+                        </div>
+                      </div>
+
+                </div>
+                
+                <div class="col-sm-12 col-md-8">
+                    <div class="table-responsive">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                          <tr>
+                            <th scope="col">Presupuesto</th>
+                            <th scope="col">Inicio</th>
+                            <th scope="col">Final</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Ingresos/Egresos</th>
+                            <th scope="col">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of data; let i = index">
+                            <td>{{ item.nombre }}</td>
+                            <td>{{ formatearFecha(item.fechaInicial) }}</td>
+                            <td>{{ formatearFecha(item.fechaFinal) }}</td>
+                            <td>{{ item.amount }}</td>
+                            <td>
+                                <button class="btn btn-success" *ngIf="!funcionesEjecutadas[i]" (click)="verEstado(formatearFecha(item.fechaInicial), formatearFecha(item.fechaFinal), i)">Ver Estado</button>
+                                <div *ngIf="funcionesEjecutadas[i]">
+                                    <div>{{ resultadosFunciones[i] }}</div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="borrarPresupuesto(item._id)">Borrar</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>

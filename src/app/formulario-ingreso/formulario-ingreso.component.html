@@ -1,0 +1,33 @@
+<!-- Page Content -->
+<div class="cnt_login">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-8 col-sm-12 col-md-5 text-center">
+                <div class="login-box">
+                    <h2>Formulario de Ingreso</h2>
+                    <form>
+                      <div class="user-box">
+                        <input type="text" placeholder="user" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"> 
+                        <label>Usuario</label>
+                      </div>
+                      <div class="user-box">
+                        <input type="password" placeholder="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                        <label>Contrase&ntilde;a</label>
+                      </div>
+                      <button type="button" class="btn-ingreso" (click)="login()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Entrar
+                      </button>
+                      <div class="alert alert-danger mt-4" *ngIf="errorlogin"  role="alert">
+                        Acceso Denegado.
+                      </div>
+                    </form>
+                  </div>
+
+            </div>
+        </div>
+    </div>
+</div>
